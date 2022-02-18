@@ -12,15 +12,16 @@ router.get('/', (req, res) => {
 
   const reqData = qs.parse(req.url.split('?')[1]);
 
-  const newTwitch = TwitchDB(reqData);
+  const newTwitch = TwitchDB({
+    username: req.user.username,
+    code: reqData.code,
+  });
 
-  console.log(reqData.code);
-
-  newTwitch.save(reqData.code, (err) => {
+  newTwitch.save({ code: reqData.code, username: req.user.username }, (err, data) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('success');
+      console.log(data);
     }
   });
 

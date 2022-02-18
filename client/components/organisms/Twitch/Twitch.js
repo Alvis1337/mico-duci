@@ -25,6 +25,11 @@ export default function Twitch() {
       .then(res => console.log(res));
   };
 
+  const responseType = 'code';
+  const clientId = '920gsvpx1wcygfiwjswpkiy7hbl3rp';
+  const redirectUri = 'https://camphelp.ngrok.io/auth-callback';
+  const state = Math.random();
+
   return (
     <div className="home-page page">
       <button
@@ -44,6 +49,13 @@ export default function Twitch() {
         }}
       >
         get subscriptions
+      </button>
+      <button
+        type="button"
+      >
+        <a href={`https://id.twitch.tv/oauth2/authorize?response_type=${responseType}&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`}>
+          login with twitch
+        </a>
       </button>
     </div>
   );

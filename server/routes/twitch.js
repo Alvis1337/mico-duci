@@ -1,10 +1,10 @@
 const express = require('express');
 const { ClientCredentialsAuthProvider } = require('@twurple/auth');
 const { ApiClient } = require('@twurple/api');
-const { EventSubListener, EventSubMiddleware, EventSubChannelFollowEvent, EnvPortAdapter, ReverseProxyAdapter} = require('@twurple/eventsub');
-const {NgrokAdapter} = require("@twurple/eventsub-ngrok");
-const Partial = require("ramda/src/partial");
+const { EventSubListener, EventSubMiddleware, ReverseProxyAdapter} = require('@twurple/eventsub');
 const {EventSubChannelPollBeginSubscription} = require("@twurple/eventsub/lib/subscriptions/EventSubChannelPollBeginSubscription");
+const {TwitchDB} = require("../database/schemas");
+const {requireAuth} = require("./middleware");
 
 
 const router = express.Router({
@@ -19,12 +19,12 @@ router.get('/', (req, res) => {
 
     const listenerNgrok = async () => {
         const clientId = '920gsvpx1wcygfiwjswpkiy7hbl3rp';
-        const clientSecret = 'nli8xrpxhyv0a8putp30cxpw5mmrm0';
+        const clientSecret = 'e5kplo8ihwe5b0aotszy3l1zx47g84';
 
         const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret, {
             currentScopes: EventSubChannelPollBeginSubscription
         });
-        const apiClient = new ApiClient({ authProvider });
+        const apiClient = new ApiClient({authProvider});
 
         const listener = new EventSubListener({
             apiClient,
@@ -40,12 +40,11 @@ router.get('/', (req, res) => {
         const userId = '62135290';
 
         const middleware = new EventSubMiddleware({
-          apiClient,
-          hostName: 'camphelp.ngrok.io',
-          pathPrefix: '/login/twitch',
-          secret: Math.random()
+            apiClient,
+            hostName: 'camphelp.ngrok.io',
+            pathPrefix: '/login/twitch',
+            secret: Math.random()
         });
-
 
 
         // const onlineSubscription = await listener.subscribeToChannelFollowEvents('62135290', event => {
@@ -58,7 +57,7 @@ router.get('/', (req, res) => {
 
         try {
             await middleware.apply(app);
-            app.listen(8000, '127.0.0.1',1,async () => {
+            app.listen(8000, '127.0.0.1', 1, async () => {
                 await middleware.markAsReady();
                 await listener.subscribeToChannelPollBeginEvents(userId)
                 await listener.listen();
@@ -70,5 +69,15 @@ router.get('/', (req, res) => {
         }
     };
     listenerNgrok()
+});
+
+router.get('/get', requireAuth, (req, res) => {
+    TwitchDB.find({}, (err, todos) => {
+        if (err) {
+            res.status(400).send({ message: 'Get code failed', err });
+        } else {
+            res.send({ todos });
+        }
+    });
 });
 

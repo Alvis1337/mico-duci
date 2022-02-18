@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const TwitchSchema = new Schema({
-  username: { type: Schema.ObjectId, ref: 'User' },
+  username: { type: String },
   code: { type: String },
   client_id: { type: String },
   client_secret: { type: String },
