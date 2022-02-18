@@ -38,6 +38,10 @@ export default function Navigation({ pathname }) {
     ? pathname === '/settings'
     : R.slice(0, 10, pathname) === '/settings/';
 
+  const isTwitch = (pathname.length === 14)
+    ? pathname === '/twitch'
+    : R.slice(0, 15, pathname) === '/twitch/';
+
   return (
     <Navbar fixed="top" shadow>
       <Container>
@@ -124,6 +128,17 @@ export default function Navigation({ pathname }) {
               >
                 <Title size="6">
                   Settings
+                </Title>
+              </Navbar.Item>
+              <Navbar.Item
+                className="is-hidden-mobile"
+                to="/twitch"
+                active={isTwitch}
+                tab
+                component={Link}
+              >
+                <Title size="6">
+                  Twitch
                 </Title>
               </Navbar.Item>
             </Navbar.Start>
