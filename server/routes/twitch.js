@@ -72,11 +72,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/get', requireAuth, (req, res) => {
-    TwitchDB.find({}, (err, todos) => {
+    TwitchDB.find({username: req.user.username}, (err, user) => {
         if (err) {
             res.status(400).send({ message: 'Get code failed', err });
         } else {
-            res.send({ todos });
+            if (!user[0]) {
+                res.status(400).send({message: 'This user has not done twitch oauth'})
+            } else {
+                res.send({ user });
+            }
         }
     });
 });

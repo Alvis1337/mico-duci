@@ -17,11 +17,31 @@ router.get('/', (req, res) => {
     code: reqData.code,
   });
 
-  newTwitch.save({ code: reqData.code, username: req.user.username }, (err, data) => {
+  console.log(reqData);
+
+  TwitchDB.findByIdAndUpdate(reqData._id, {code: reqData.code}, (), (err, id) => {
+  //  updating a user
+  })
+
+  TwitchDB.findById(reqData._id, (err, id) => {
     if (err) {
-      console.log(err);
+      console.log('did not found the user');
+      newTwitch.save({ code: reqData.code, username: req.user.username, _id: id }, (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+        }
+      });
     } else {
-      console.log(data);
+      console.log('found the user');
+      newTwitch.update({ code: reqData.code, username: req.user.username, _id: id }, (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+        }
+      });
     }
   });
 
