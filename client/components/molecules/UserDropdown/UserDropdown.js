@@ -12,18 +12,18 @@ export default function UserDropdown({ open, closeDropdown }) {
 
   const dropdown = useRef(null);
 
-  const dropdownListener = e =>
-    !e.path.includes(dropdown.current) && open && closeDropdown();
-
-  useEffect(() => {
-    window.addEventListener('click', dropdownListener);
-    window.addEventListener('touchend', dropdownListener);
-
-    return () => {
-      window.removeEventListener('click', dropdownListener);
-      window.removeEventListener('touchend', dropdownListener);
-    };
-  }, [open]);
+  // const dropdownListener = () =>
+  //   !e.path.includes(dropdown.current) && open && closeDropdown();
+  //
+  // useEffect(() => {
+  //   window.addEventListener('click', dropdownListener());
+  //   window.addEventListener('touchend', dropdownListener);
+  //
+  //   return () => {
+  //     window.removeEventListener('click', dropdownListener);
+  //     window.removeEventListener('touchend', dropdownListener);
+  //   };
+  // }, [open]);
 
   const logout = () => {
     closeDropdown();
@@ -59,7 +59,7 @@ export default function UserDropdown({ open, closeDropdown }) {
   );
 }
 
-UserDropdown.propTypes = {
-  open: PropTypes.bool.isRequired,
-  closeDropdown: PropTypes.func.isRequired,
-};
+// UserDropdown.propTypes = {
+//   open: PropTypes.bool.isRequired,
+//   closeDropdown: PropTypes.func.isRequired,
+// };
