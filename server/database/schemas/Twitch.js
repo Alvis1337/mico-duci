@@ -8,6 +8,8 @@ const TwitchSchema = new Schema({
   client_id: { type: String },
   client_secret: { type: String },
   updated_at: { type: Date },
+  access_token: { type: String },
+  refresh_token: { type: String },
 }, { versionKey: false });
 
 const TwitchDB = mongoose.model('Twitch', TwitchSchema);

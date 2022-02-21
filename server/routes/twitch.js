@@ -10,15 +10,47 @@ const router = express.Router({
     caseSensitive: false
 });
 
-const app = express()
+const crypto = require('crypto')
+const app = express();
+const port = 8080;
+
+// Notification request headers
+const TWITCH_MESSAGE_ID = 'Twitch-Eventsub-Message-Id'.toLowerCase();
+const TWITCH_MESSAGE_TIMESTAMP = 'Twitch-Eventsub-Message-Timestamp'.toLowerCase();
+const TWITCH_MESSAGE_SIGNATURE = 'Twitch-Eventsub-Message-Signature'.toLowerCase();
+const MESSAGE_TYPE = 'Twitch-Eventsub-Message-Type'.toLowerCase();
+
+// Notification message types
+const MESSAGE_TYPE_VERIFICATION = 'webhook_callback_verification';
+const MESSAGE_TYPE_NOTIFICATION = 'notification';
+const MESSAGE_TYPE_REVOCATION = 'revocation';
+
+// Prepend this string to the HMAC that's created from the message
+const HMAC_PREFIX = 'sha256=';
+
+app.use(express.raw({          // Need raw message body for signature verification
+    type: 'application/json'
+}))
+
+// ./opt/twitch event trigger follow -F https://camphelp.ngrok.io/twitch/follower-listener -s s3crfsafsafase7
+
+router.post('/', (req, res) => {
+    console.log(req.body.event)
+    return res.sendStatus(200)
+})
 
 module.exports = router;
+
+router.post('/', (req, res) => {
+    console.log('we got a post bois')
+    console.log(req, res)
+})
 
 router.get('/', (req, res) => {
 
     const listenerNgrok = async () => {
         const clientId = '920gsvpx1wcygfiwjswpkiy7hbl3rp';
-        const clientSecret = 'e5kplo8ihwe5b0aotszy3l1zx47g84';
+        const clientSecret = '747efw41jzp6qds5mslatgo2muyr0e';
 
         const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret, {
             currentScopes: EventSubChannelPollBeginSubscription
@@ -36,18 +68,18 @@ router.get('/', (req, res) => {
             secret: Math.random(),
         });
 
-        const userId = '62135290';
+        // const userId = '62135290';
+        //
+        // const middleware = new EventSubMiddleware({
+        //     apiClient,
+        //     hostName: 'camphelp.ngrok.io',
+        //     pathPrefix: '/login/twitch',
+        //     secret: Math.random()
+        // });
 
-        const middleware = new EventSubMiddleware({
-            apiClient,
-            hostName: 'camphelp.ngrok.io',
-            pathPrefix: '/login/twitch',
-            secret: Math.random()
-        });
-
-
+        //
         // const onlineSubscription = await listener.subscribeToChannelFollowEvents('62135290', event => {
-        //   console.log(`${event.userDisplayName} just followed ${event.broadcasterDisplayName}!`);
+        //   return console.log(`${event.userDisplayName} just followed ${event.broadcasterDisplayName}!`);
         // });
         //
         // const pollSubscription = await listener.subscribeToChannelFollowEvents('62135290', event => {
@@ -55,13 +87,10 @@ router.get('/', (req, res) => {
         // });
 
         try {
-            await middleware.apply(app);
-            app.listen(8000, '127.0.0.1', 1, async () => {
-                await middleware.markAsReady();
-                await listener.subscribeToChannelPollBeginEvents(userId)
+
                 await listener.listen();
-            });
         } catch (e) {
+
             await listener.unlisten();
             console.log('stopped listening');
             console.log(e);

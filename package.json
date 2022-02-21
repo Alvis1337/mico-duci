@@ -1,7 +1,7 @@
 {
-  "name": "mern-boilerplate",
-  "version": "0.6.0",
-  "description": "A full MERN stack boilerplate",
+  "name": "micoduci",
+  "version": "0.0.1",
+  "description": "Twitch API wrapper",
   "main": "server/index.js",
   "scripts": {
     "build": "./scripts/build-prd.sh",
@@ -58,6 +58,7 @@
     "@twurple/eventsub": "^5.0.18",
     "@twurple/eventsub-ngrok": "^5.0.18",
     "animate.css": "^4.1.1",
+    "axios": "^0.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bulma": "0.9.3",
