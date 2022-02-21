@@ -10,32 +10,21 @@ const router = express.Router({
     caseSensitive: false
 });
 
-const crypto = require('crypto')
-const app = express();
-const port = 8080;
-
-// Notification request headers
-const TWITCH_MESSAGE_ID = 'Twitch-Eventsub-Message-Id'.toLowerCase();
-const TWITCH_MESSAGE_TIMESTAMP = 'Twitch-Eventsub-Message-Timestamp'.toLowerCase();
-const TWITCH_MESSAGE_SIGNATURE = 'Twitch-Eventsub-Message-Signature'.toLowerCase();
-const MESSAGE_TYPE = 'Twitch-Eventsub-Message-Type'.toLowerCase();
-
-// Notification message types
-const MESSAGE_TYPE_VERIFICATION = 'webhook_callback_verification';
-const MESSAGE_TYPE_NOTIFICATION = 'notification';
-const MESSAGE_TYPE_REVOCATION = 'revocation';
-
-// Prepend this string to the HMAC that's created from the message
-const HMAC_PREFIX = 'sha256=';
-
-app.use(express.raw({          // Need raw message body for signature verification
-    type: 'application/json'
-}))
-
 // ./opt/twitch event trigger follow -F https://camphelp.ngrok.io/twitch/follower-listener -s s3crfsafsafase7
 
 router.post('/', (req, res) => {
-    console.log(req.body.event)
+    console.log(req.body)
+
+    const MESSAGE_TYPE = 'Twitch-Eventsub-Message-Type'.toLowerCase();
+
+// Notification message types
+    const MESSAGE_TYPE_VERIFICATION = 'webhook_callback_verification';
+
+
+    // Get JSON object from body, so you can process the message.
+    if (MESSAGE_TYPE_VERIFICATION === req.headers[MESSAGE_TYPE]) {
+        return res.status(200).send(req.body.challenge);
+    }
     return res.sendStatus(200)
 })
 
