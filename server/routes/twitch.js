@@ -1,8 +1,7 @@
 const express = require('express');
 const { ClientCredentialsAuthProvider } = require('@twurple/auth');
 const { ApiClient } = require('@twurple/api');
-const { EventSubListener, EventSubMiddleware, ReverseProxyAdapter} = require('@twurple/eventsub');
-const {EventSubChannelPollBeginSubscription} = require("@twurple/eventsub/lib/subscriptions/EventSubChannelPollBeginSubscription");
+const { EventSubListener, EventSubMiddleware, ReverseProxyAdapter, EventSubChannelPollBeginSubscription} = require('@twurple/eventsub');
 const {TwitchDB} = require("../database/schemas");
 const {requireAuth} = require("./middleware");
 

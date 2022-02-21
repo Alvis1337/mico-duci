@@ -1,50 +1,35 @@
 const express = require('express');
 const qs = require('querystring');
 const { TwitchDB } = require('../database/schemas');
+const { requireAuth } = require('./middleware');
 
-const router = express.Router({
-  caseSensitive: false,
-});
+const router = express.Router();
 
 module.exports = router;
 
-router.get('/', (req, res) => {
+router.get('/', requireAuth, (req, res) => {
 
   const reqData = qs.parse(req.url.split('?')[1]);
 
-  const newTwitch = TwitchDB({
-    username: req.user.username,
-    code: reqData.code,
-  });
-
-  console.log(reqData);
-
-  TwitchDB.findByIdAndUpdate(reqData._id, {code: reqData.code}, (), (err, id) => {
-  //  updating a user
-  })
-
-  TwitchDB.findById(reqData._id, (err, id) => {
-    if (err) {
-      console.log('did not found the user');
-      newTwitch.save({ code: reqData.code, username: req.user.username, _id: id }, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(data);
-        }
+  TwitchDB.findOneAndUpdate({ username: req.user.username }, { code: reqData.code }, { new: true }, (err, data) => {
+    if (!data) {
+      const newTwitch = TwitchDB({
+        username: req.user.username,
+        code: reqData.code,
       });
-    } else {
-      console.log('found the user');
-      newTwitch.update({ code: reqData.code, username: req.user.username, _id: id }, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(data);
-        }
-      });
+      try {
+        newTwitch.save({ code: reqData.code, username: req.user.username, _id: reqData.id }, (err) => {
+          if (err) {
+            return console.log('User was not created', err);
+          }
+        });
+        return console.log('User was created', data);
+      }
+      catch (err) {
+        return console.log('In the catch', err);
+      }
     }
+    console.log('User was found and token was updated');
+    return res.redirect('twitch');
   });
-
-  res.redirect('/home');
-
 });
