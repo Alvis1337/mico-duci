@@ -43,7 +43,6 @@ router.post('/', (req, res) => {
     if (apiData.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
         console.log('///////////////////')
         console.log('was channel reward')
-        console.log(apiData.event.reward.id)
         switch(apiData.event.reward.id){
             case "e56867fa-e535-4003-a582-dcb1bcf3d1bd": {
                 newRedemption('hydrate')
