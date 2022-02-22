@@ -13,7 +13,7 @@ const router = express.Router({
 
 const newRedemption = (reward) => {
     axios.post('http://192.168.5.111:8000/api/blink-api/', {
-        blink_pattern: reward
+            blink_pattern: reward
     })
         .then(response => {
             if (response.ok) {
@@ -77,6 +77,7 @@ router.post('/', (req, res) => {
                 break;
             }
         }
+        return
     } else {
         console.log('///////////////////')
         console.log('was not channel reward')
