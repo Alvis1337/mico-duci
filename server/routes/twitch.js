@@ -21,7 +21,7 @@ const newRedemption = (reward) => {
         form,
         url
     }
-    axios(options)
+    axios.post(url, form, options)
         .then(response => {
             if (response.ok) {
             return response.json()
