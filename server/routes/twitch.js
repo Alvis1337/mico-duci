@@ -5,7 +5,7 @@ const { EventSubListener, EventSubMiddleware, ReverseProxyAdapter, EventSubChann
 const {TwitchDB} = require("../database/schemas");
 const {requireAuth} = require("./middleware");
 const axios = require("axios");
-const qs = require('querystring');
+const qs = require("querystring");
 
 const router = express.Router({
     caseSensitive: false
@@ -14,15 +14,8 @@ const router = express.Router({
 const newRedemption = (reward) => {
 
     const url = `http://chris.vpn.alphatech-computing.com:8000/api/blink-api/`
-    const data = {'bar': reward}
-    const options = {
-        method: 'POST',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        data: qs.stringify(data),
-        url
-    }
 
-    axios(options)
+    axios.post(url, qs.stringify({ blink_reward: reward }))
         .then(response => {
             if (response.ok) {
             return response.json()
