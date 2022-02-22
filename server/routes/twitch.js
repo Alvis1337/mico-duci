@@ -90,7 +90,7 @@ router.post('/', (req, res) => {
     }
 
     // Get JSON object from body, so you can process the message.
-    if (MESSAGE_TYPE_VERIFICATION === req.headers[MESSAGE_TYPE]) {
+    if (apiData.subscription.type === MESSAGE_TYPE_VERIFICATION) {
         console.log('was challenge')
         return res.status(200).send(req.body.challenge);
     }
