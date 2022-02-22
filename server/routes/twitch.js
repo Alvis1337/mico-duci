@@ -14,7 +14,10 @@ const router = express.Router({
 
 const newRedemption = (reward) => {
 
-    axios.post(`http://chris.vpn.alphatech-computing.com:8000/api/blink-api/`, {body: {blink_pattern: reward}})
+    const form = FormData.new()
+    form.append('blink_pattern', reward)
+
+    axios.post(`http://chris.vpn.alphatech-computing.com:8000/api/blink-api/`, {form})
         .then(response => {
             if (response.ok) {
             return response.json()
