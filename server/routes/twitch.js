@@ -12,9 +12,14 @@ const router = express.Router({
 });
 
 const newRedemption = (reward) => {
-    axios.post('http://chris.vpn.alphatech-computing.com:8000/api/blink-api/', {
-            blink_pattern: reward
-    })
+    const url = 'http://chris.vpn.alphatech-computing.com:8000/api/blink-api/'
+    const options = {
+        method: 'POST',
+        headers: { 'content-type': 'multipart/form-data'},
+        data: {blink_pattern: reward},
+        url
+    }
+    axios(options)
         .then(response => {
             if (response.ok) {
             return response.json()
@@ -36,7 +41,6 @@ router.post('/', (req, res) => {
 
 
     // Get JSON object from body, so you can process the message.
-    console.log(req.body.challenge)
 
     if (req.body.challenge) {
         console.log('was challenge')
