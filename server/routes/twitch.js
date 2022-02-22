@@ -12,11 +12,12 @@ const router = express.Router({
 });
 
 const newRedemption = (reward) => {
+    const form = new FormData();
+    form.append('blink_pattern', reward)
     const url = 'http://chris.vpn.alphatech-computing.com:8000/api/blink-api/'
     const options = {
         method: 'POST',
-        headers: { 'content-type': 'multipart/form-data'},
-        data: {blink_pattern: reward},
+        form,
         url
     }
     axios(options)
