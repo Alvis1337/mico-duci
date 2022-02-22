@@ -30,7 +30,7 @@ const newRedemption = (reward) => {
         });
 }
 
-// ./opt/twitch event trigger follow -F https://camphelp.ngrok.io/twitch/follower-listener -s s3crfsafsafase7
+// ./opt/twitch event trigger follow -F https://twitch-api.uttensio.com/twitch/follower-listener -s s3crfsafsafase7
 
 router.post('/', (req, res) => {
 
@@ -130,7 +130,7 @@ router.get('/', (req, res) => {
                 minLevel: 'debug',
             },
             adapter: new ReverseProxyAdapter({
-                hostName: 'camphelp.ngrok.io', // The host name the server is available from
+                hostName: 'twitch-api.uttensio.com', // The host name the server is available from
             }),
             secret: Math.random(),
         });

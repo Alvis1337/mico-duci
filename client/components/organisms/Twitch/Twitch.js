@@ -21,7 +21,7 @@ export default function Twitch() {
 
   const responseType = 'code';
   const clientId = 'fpdbev7ktti34dhr9cwpbxa17tfqc6';
-  const redirectUri = 'https://camphelp.ngrok.io/auth-callback';
+  const redirectUri = 'https://twitch-api.uttensio.com/auth-callback';
   const state = Math.random();
 
   return (

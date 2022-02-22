@@ -41,7 +41,7 @@ router.get('/', requireAuth, (req, res) => {
         + '&'
         + `code=${reqData.code}`
         + '&'
-        + 'redirect_uri=https://camphelp.ngrok.io/auth-callback'
+        + 'redirect_uri=https://twitch-api.uttensio.com/auth-callback'
         + '&'
         + 'grant_type=authorization_code')
       .then(response => {
