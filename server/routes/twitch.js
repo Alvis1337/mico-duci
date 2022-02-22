@@ -12,7 +12,6 @@ const router = express.Router({
 });
 
 const newRedemption = (reward) => {
-    console.log(reward)
     axios.post('http://chris.vpn.alphatech-computing.com:8000/api/blink-api/', {
             blink_pattern: reward
     })
@@ -50,35 +49,43 @@ router.post('/', (req, res) => {
         console.log('was channel reward')
         switch(req.body.event.reward.id){
             case "e56867fa-e535-4003-a582-dcb1bcf3d1bd": {
+                console.log('hydrate')
                 newRedemption('hydrate')
                 break;
             }
             case "83b6f40a-f8d3-48e1-8dfe-84d29ab81610": {
+                console.log('albert')
                 newRedemption('albert')
                 break;
             }
             case "85e65ead-606a-45a8-b4fa-0e8d8fa41f7d": {
+                console.log('wheel')
                 newRedemption('wheel-spin')
                 break;
             }
             case "532e76ab-a008-4272-8c0d-e49e29ab03da": {
+                console.log('hero')
                 newRedemption('hero-request')
                 break;
             }
             case "6241542d-97fb-494c-8b40-1d13f9c0f609": {
+                console.log('mod-poll')
                 newRedemption('mod-poll')
                 break;
             }
             case "ac1d9828-68c8-4bfb-9747-30e4342a0267": {
+                console.log('fireball')
                 newRedemption('fireball')
                 break;
             }
             case "0f9a7f4b-b0e1-4412-bbbf-397988f2c68c": {
+                console.log('tarot-reading')
                 newRedemption('tarot-reading')
                 break;
             }
             case "10d047fd-0cb4-4b88-8d06-35b56bba90fe": {
-                newRedemption('lose-glasses-5')
+                console.log('lose-glasses-5')
+                newRedemption('lose-glasses-5');
                 break;
             }
         }
