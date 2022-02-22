@@ -16,12 +16,8 @@ const newRedemption = (reward) => {
     const form = new FormData();
     form.append('blink_pattern', reward)
     const url = 'http://chris.vpn.alphatech-computing.com:8000/api/blink-api/'
-    const options = {
-        method: 'POST',
-        form,
-        url
-    }
-    axios.post(url, form, options)
+
+    axios.post(url, form)
         .then(response => {
             if (response.ok) {
             return response.json()
