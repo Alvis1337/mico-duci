@@ -34,13 +34,8 @@ const newRedemption = (reward) => {
 
 router.post('/', (req, res) => {
 
-    const MESSAGE_TYPE = 'Twitch-Eventsub-Message-Type'.toLowerCase();
-
 // Notification message types
-    const MESSAGE_TYPE_VERIFICATION = 'webhook_callback_verification';
-    const apiData = req.body
-    console.log(apiData)
-    if (apiData.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
+    if (req.body.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
         console.log('///////////////////')
         console.log('was channel reward')
         switch(apiData.event.reward.id){
@@ -80,17 +75,17 @@ router.post('/', (req, res) => {
         return
     }
 
-    if (apiData.subscription.type === 'channel.follow') {
+    if (req.body.subscription.type === 'channel.follow') {
         newFollower()
     }
 
-    if (apiData.subscription.type === 'channel.subscribe') {
+    if (req.body.subscription.type === 'channel.subscribe') {
         console.log('///////////////////')
         console.log('was a new sub')
     }
 
     // Get JSON object from body, so you can process the message.
-    if (apiData.subscription.type === MESSAGE_TYPE_VERIFICATION) {
+    if (req.body.challenge) {
         console.log('was challenge')
         return res.status(200).send(req.body.challenge);
     }
