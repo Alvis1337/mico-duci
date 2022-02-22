@@ -5,7 +5,7 @@ const { EventSubListener, EventSubMiddleware, ReverseProxyAdapter, EventSubChann
 const {TwitchDB} = require("../database/schemas");
 const {requireAuth} = require("./middleware");
 const axios = require("axios");
-import qs from 'qs';
+const qs = require('querystring');
 
 const router = express.Router({
     caseSensitive: false
