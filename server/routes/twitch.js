@@ -51,41 +51,49 @@ router.post('/', (req, res) => {
             case "e56867fa-e535-4003-a582-dcb1bcf3d1bd": {
                 console.log('hydrate')
                 newRedemption('hydrate')
+                res.sendStatus(200)
                 break;
             }
             case "83b6f40a-f8d3-48e1-8dfe-84d29ab81610": {
                 console.log('albert')
                 newRedemption('albert')
+                res.sendStatus(200)
                 break;
             }
             case "85e65ead-606a-45a8-b4fa-0e8d8fa41f7d": {
                 console.log('wheel')
                 newRedemption('wheel-spin')
+                res.sendStatus(200)
                 break;
             }
             case "532e76ab-a008-4272-8c0d-e49e29ab03da": {
                 console.log('hero')
                 newRedemption('hero-request')
+                res.sendStatus(200)
                 break;
             }
             case "6241542d-97fb-494c-8b40-1d13f9c0f609": {
                 console.log('mod-poll')
                 newRedemption('mod-poll')
+                res.sendStatus(200)
                 break;
             }
             case "ac1d9828-68c8-4bfb-9747-30e4342a0267": {
                 console.log('fireball')
                 newRedemption('fireball')
+                res.sendStatus(200)
                 break;
             }
             case "0f9a7f4b-b0e1-4412-bbbf-397988f2c68c": {
                 console.log('tarot-reading')
                 newRedemption('tarot-reading')
+                res.sendStatus(200)
                 break;
             }
             case "10d047fd-0cb4-4b88-8d06-35b56bba90fe": {
                 console.log('lose-glasses-5')
                 newRedemption('lose-glasses-5');
+                res.sendStatus(200)
                 break;
             }
         }
