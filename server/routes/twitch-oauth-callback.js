@@ -33,9 +33,9 @@ router.get('/', requireAuth, (req, res) => {
     console.log('User was found and token was updated');
 
     axios.post('https://id.twitch.tv/oauth2/token?'
-        + 'client_id=920gsvpx1wcygfiwjswpkiy7hbl3rp'
+        + 'client_id=fpdbev7ktti34dhr9cwpbxa17tfqc6'
         + '&'
-        + 'client_secret=747efw41jzp6qds5mslatgo2muyr0e'
+        + 'client_secret=d3va2j8wk5ui61oj63ljksvta14vfn'
         + '&'
         + 'scope=channel:read:redemptions'
         + '&'
@@ -72,7 +72,7 @@ router.get('/', requireAuth, (req, res) => {
           }
           return console.log('success');
         });
-      });
+      }).catch(e => console.log(e));
 
     return res.redirect('twitch');
   });
