@@ -35,7 +35,7 @@ const newRedemption = (reward) => {
 router.post('/', (req, res) => {
 
 // Notification message types
-    console.log(req.body)
+    console.log(req.body.subscription.type)
     if (req.body.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
         console.log('///////////////////')
         console.log('was channel reward')
