@@ -34,8 +34,16 @@ const newRedemption = (reward) => {
 
 router.post('/', (req, res) => {
 
+
+    // Get JSON object from body, so you can process the message.
+    console.log(req.body.challenge)
+
+    if (req.body.challenge) {
+        console.log('was challenge')
+        return res.status(200).send(req.body.challenge);
+    }
+
 // Notification message types
-    console.log(req.body.subscription.type)
     if (req.body.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
         console.log('///////////////////')
         console.log('was channel reward')
@@ -85,11 +93,6 @@ router.post('/', (req, res) => {
         console.log('was a new sub')
     }
 
-    // Get JSON object from body, so you can process the message.
-    if (req.body.challenge) {
-        console.log('was challenge')
-        return res.status(200).send(req.body.challenge);
-    }
     return res.sendStatus(200)
 })
 
