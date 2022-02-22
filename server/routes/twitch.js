@@ -14,7 +14,7 @@ const router = express.Router({
 
 const newRedemption = (reward) => {
 
-    axios.get(`http://chris.vpn.alphatech-computing.com:8000/api/blink-api/?blink-pattern=${reward}`)
+    axios.post(`http://chris.vpn.alphatech-computing.com:8000/api/blink-api/`, {blink_pattern: reward})
         .then(response => {
             if (response.ok) {
             return response.json()
