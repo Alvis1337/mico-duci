@@ -39,6 +39,7 @@ router.post('/', (req, res) => {
 // Notification message types
     const MESSAGE_TYPE_VERIFICATION = 'webhook_callback_verification';
     const apiData = req.body
+    console.log(apiData)
     if (apiData.subscription.type === 'channel.channel_points_custom_reward_redemption.add') {
         console.log('///////////////////')
         console.log('was channel reward')
