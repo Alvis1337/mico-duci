@@ -78,24 +78,15 @@ router.post('/', (req, res) => {
             }
         }
         return
-    } else {
-        console.log('///////////////////')
-        console.log('was not channel reward')
     }
 
     if (apiData.subscription.type === 'channel.follow') {
         newFollower()
-    } else {
-        console.log('///////////////////')
-        console.log('was not a follower')
     }
 
     if (apiData.subscription.type === 'channel.subscribe') {
         console.log('///////////////////')
         console.log('was a new sub')
-    } else {
-        console.log('///////////////////')
-        console.log('was not a new sub')
     }
 
     // Get JSON object from body, so you can process the message.
