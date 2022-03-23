@@ -1,17 +1,5 @@
-# MERN Boilerplate
-MongoDB Express.js React.js Node.js
-
-A Full MERN Stack Boilerplate for Web Apps. Includes a local authentication system using passport. User is given a simple profile with Full Name and Profile Picture. User is also able to reset password and username case.
-
-NEW: For those of you who wish to separate the client and server into separate projects, I have created two repos that do just that! Check out [MERN Client](https://github.com/djizco/mern-client) and [MERN Server](https://github.com/djizco/mern-server).
-
-## Requirements
-
-* Operating System: MacOS or Linux
-* [Node.js](https://nodejs.org/) (I recommend installing with [NVM](https://github.com/nvm-sh/nvm))
-* [Homebrew](https://brew.sh) (to install MongoDB)
-
-## Quick Start
+# mico-duci
+This project started as a simple backend for the LED lights, hence the name mico-duci, but after realizing we have a javascript backend here with full dns resolution, this will be the place for web projects and requests. We already have user auth, twitch oauth, endpoints, etc. It would be dumb not to go off of this. The next iteration on this code base will be for the picking of powerpoint topics and assigning them to users.
 
 #### Setup
 
@@ -29,6 +17,9 @@ brew services start mongodb-community
 ```
 
 #### for Development
+
+Install reqs (I had to use force, thanks mongoose)
+``npm install --force``
 
 Start the client
 ```bash
@@ -57,24 +48,6 @@ npm run test:verbose
 npm run test:watch-client
 npm run test:watch-server
 ```
-
-## Setup Instructions
-
-Note: This is now a github template project. This makes copying the contents of the project
-into a new repo very simple.
-
-To setup your own project, you will need to copy the contents of this project into a new repo.
-You will need to update the content in these files to names of your project and yourself:
-
-* package.json: name, version, description, repository, author, bugs, homepage
-* LICENSE: (update to your preferred license)
-* client/index.html: description and title
-* this README.md
-
-This is also a good time to go through the included libraries to add or remove features that you want.
-
-After this you can commit the files into a new repository and push up to your github.
-You can now start updating files in your client to begin working on your own project!
 
 ## Features
 
